@@ -6,7 +6,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
