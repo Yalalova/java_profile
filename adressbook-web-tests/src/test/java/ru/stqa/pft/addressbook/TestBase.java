@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 public class TestBase {
@@ -25,7 +26,7 @@ public class TestBase {
     login("admin","secret");
   }
 
-  private void login(String username, String password ) {
+  public void login(String username, String password ) {
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys(username);
     driver.findElement(By.name("pass")).click();
@@ -34,7 +35,7 @@ public class TestBase {
     driver.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
-  protected void logout() {
+  public void logout() {
     driver.findElement(By.linkText("Logout")).click();
   }
 
@@ -108,11 +109,57 @@ public class TestBase {
     }
   }
 
-  protected void deleteSelectedGroups() {
+  public void deleteSelectedGroups() {
     driver.findElement(By.name("delete")).click();
   }
 
-  protected void selectGroup() {
+  public void selectGroup() {
     driver.findElement(By.xpath("(//input[@name='selected[]'])[10]")).click();
+  }
+
+  protected void returnToHomePage() {
+    driver.findElement(By.linkText("home")).click();
+  }
+
+  protected void submitContactCreation() {
+    driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  protected void fillContactForm(ContactData contactData) {
+    driver.findElement(By.name("firstname")).click();
+    driver.findElement(By.name("firstname")).clear();
+    driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+    driver.findElement(By.name("lastname")).click();
+    driver.findElement(By.name("lastname")).clear();
+    driver.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+    driver.findElement(By.name("address")).click();
+    driver.findElement(By.name("address")).clear();
+    driver.findElement(By.name("address")).sendKeys(contactData.getAddress());
+    driver.findElement(By.name("mobile")).click();
+    driver.findElement(By.name("mobile")).clear();
+    driver.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
+    driver.findElement(By.name("email")).click();
+    driver.findElement(By.name("email")).clear();
+    driver.findElement(By.name("email")).sendKeys(contactData.getEmail());
+  }
+
+  protected void addNewContact() {
+    driver.findElement(By.linkText("add new")).click();
+  }
+
+  protected void acceptDeletion() {
+    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+  }
+
+  protected void deleteContact() {
+    driver.findElement(By.xpath("//input[@value='Delete']")).click();
+  }
+
+  protected void acceptNextAlert() {
+    acceptNextAlert = true;
+  }
+
+  protected void findContact() {
+    driver.findElement(By.id("2")).click();
   }
 }
