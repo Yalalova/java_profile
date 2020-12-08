@@ -1,7 +1,8 @@
 package ru.stqa.pft.addressbook;
 
 import org.testng.annotations.*;
-
+import static org.testng.Assert.*;
+import org.openqa.selenium.*;
 
 public class ContactCreationTests extends TestBase {
 

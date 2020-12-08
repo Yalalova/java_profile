@@ -13,7 +13,7 @@ import static org.testng.Assert.fail;
 public class TestBase {
   private WebDriver driver;
   private String baseUrl;
-  private boolean acceptNextAlert = true;
+  public boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @BeforeClass(alwaysRun = true)
@@ -23,10 +23,10 @@ public class TestBase {
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/");
-    login("admin","secret");
+    login("admin", "secret");
   }
 
-  public void login(String username, String password ) {
+  public void login(String username, String password) {
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys(username);
     driver.findElement(By.name("pass")).click();
@@ -94,7 +94,8 @@ public class TestBase {
     }
   }
 
-  private String closeAlertAndGetItsText() {
+
+  public String closeAlertAndGetItsText() {
     try {
       Alert alert = driver.switchTo().alert();
       String alertText = alert.getText();
@@ -147,19 +148,14 @@ public class TestBase {
     driver.findElement(By.linkText("add new")).click();
   }
 
-  protected void acceptDeletion() {
-    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-  }
 
-  protected void deleteContact() {
+  protected void clickDelete() {
     driver.findElement(By.xpath("//input[@value='Delete']")).click();
   }
 
-  protected void acceptNextAlert() {
-    acceptNextAlert = true;
-  }
+  protected void selectContact() {
+    driver.findElement(By.xpath("(//input[@name='selected[]'])")).click();
 
-  protected void findContact() {
-    driver.findElement(By.id("2")).click();
   }
 }
+
