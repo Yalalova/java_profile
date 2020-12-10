@@ -6,12 +6,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import static org.testng.Assert.fail;
 
-public class ContactHelper {
-  protected StringBuffer verificationErrors = new StringBuffer();
-  private WebDriver driver;
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver driver) {
-    this.driver = driver;
+    super (driver);
   }
 
   public void submitContactCreation() {
@@ -19,37 +17,25 @@ public class ContactHelper {
   }
 
   public void fillContactForm(ContactData contactData) {
-    driver.findElement(By.name("firstname")).click();
-    driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-    driver.findElement(By.name("lastname")).click();
-    driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-    driver.findElement(By.name("address")).click();
-    driver.findElement(By.name("address")).clear();
-    driver.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    driver.findElement(By.name("mobile")).click();
-    driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
-    driver.findElement(By.name("email")).click();
-    driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    type(By.name("firstname"),contactData.getFirstname());
+    type(By.name("lastname"),contactData.getLastname());
+    type(By.name("address"),contactData.getAddress());
+    type(By.name("mobile"),contactData.getMobile());
+    type(By.name("email"),contactData.getEmail());
+
   }
 
-  public void addNewContact() {
-    driver.findElement(By.linkText("add new")).click();
+
+ public void addNewContact() {
+  click(By.linkText("add new"));
   }
 
   public void clickDelete() {
-    driver.findElement(By.xpath("//input[@value='Delete']")).click();
+    click(By.xpath("//input[@value='Delete']"));
   }
 
   public void selectContact() {
-    driver.findElement(By.xpath("(//input[@name='selected[]'])")).click();
+    click(By.xpath("(//input[@name='selected[]'])"));
 
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
   }
 }
