@@ -35,7 +35,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContact() {
-    click(By.xpath("(//input[@name='selected[]'])"));
+    click(By.name("selected[]"));
 
   }
 }
