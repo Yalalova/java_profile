@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -12,6 +11,7 @@ import static org.testng.Assert.fail;
 public class ContactHelper extends HelperBase {
 
   private boolean creation;
+  private ContactData contact;
 
   public ContactHelper(WebDriver driver) {
     super(driver);
@@ -61,4 +61,15 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+
+  public void createNewContact(ContactData contact, boolean b) {
+    addNewContact();
+    fillContactForm(contact, b);
+    submitContactCreation();
+  }
 }
+
