@@ -41,10 +41,11 @@ public class ContactHelper extends HelperBase {
 
   public void clickDelete() {
     click(By.xpath("//input[@value='Delete']"));
+
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    driver.findElements(By.name("selected[]")).get(index).click();
 
   }
 
@@ -70,6 +71,10 @@ public class ContactHelper extends HelperBase {
     addNewContact();
     fillContactForm(contact, b);
     submitContactCreation();
+  }
+
+  public int getContactCount() {
+    return driver.findElements(By.name("selected[]")).size();
   }
 }
 

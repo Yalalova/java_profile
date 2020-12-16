@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
           driver = new InternetExplorerDriver();
       }
 
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
       driver.get("http://localhost/addressbook/");
       groupHelper = new GroupHelper(driver);
       navigationHelper = new NavigationHelper(driver);
