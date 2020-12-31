@@ -1,27 +1,30 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import static org.testng.Assert.*;
+import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
 
   @Test
   public void testContactDeletionTests() throws Exception {
-     int before = app.getContactHelper().getContactCount();
+
       if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createNewContact(new ContactData("test1", "test2", "test3", "test4", "test5", "test1"), true);
+      app.getContactHelper().createNewContact(new ContactData(0,"test1", "test2", null, null, null, "test1_group"),true);
     }
-      app.getContactHelper().selectContact(before - 1);
+     List<ContactData> before = app.getContactHelper().getContactList();
+      app.getContactHelper().selectContact(before.size() - 1);
       app.acceptNextAlert = true;
       app.getContactHelper().clickDelete();
       app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$");
       app.getNavigationHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after,before - 1);
+      List<ContactData> after =app.getContactHelper().getContactList();
+      Assert.assertEquals(after.size(),before.size() - 1);
+      before.remove(before.size() - 1);
+      Assert.assertEquals(before,after);
       app.getSessionHelper().logout();
     }
 
