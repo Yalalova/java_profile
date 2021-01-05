@@ -20,7 +20,7 @@ public class ContactDeletionTests extends TestBase {
       app.acceptNextAlert = true;
       app.getContactHelper().clickDelete();
       app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$");
-      app.getNavigationHelper().returnToHomePage();
+      app.goTo().returnToHomePage();
       List<ContactData> after =app.getContactHelper().getContactList();
       Assert.assertEquals(after.size(),before.size() - 1);
       before.remove(before.size() - 1);
