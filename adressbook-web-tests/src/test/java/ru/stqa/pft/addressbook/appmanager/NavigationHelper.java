@@ -20,5 +20,9 @@ public class NavigationHelper extends HelperBase{
   public void returntoGroupPage() {
     click(By.linkText("group page"));
   }
+
+    public void confirmAction() {
+  driver.switchTo().alert().accept();
 }
 
+}

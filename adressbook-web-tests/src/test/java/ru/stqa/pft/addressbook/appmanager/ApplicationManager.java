@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 
   public class ApplicationManager  {
+    public ApplicationManager goTo;
     WebDriver driver;
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
@@ -89,11 +90,14 @@ import java.util.concurrent.TimeUnit;
       return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
       return contactHelper;
     }
     public SessionHelper getSessionHelper() {
       return sessionHelper;
     }
 
+    public void confirmAction() {
+
+    }
   }
