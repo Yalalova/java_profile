@@ -11,21 +11,22 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
-
   @BeforeMethod
   public void applyPreconditions() {
     if (app.contact().all().size() == 0) {
       app.goTo().groupPage();
       if (app.group().all().size() == 0) {
-        app.group().create(new GroupData().withName("test1_group").withHeader("test1_group").withFooter("test1_group"));
+        app.group().create(new GroupData().withName("test1").withHeader("test1").withFooter("test1"));
       }
       app.contact().createNewContact
-              (new ContactData().withFirstname("firstname").withLastname("lastname").withGroup("test1_group"),
+              (new ContactData().withFirstname("firstname").withLastname("lastname").withGroup("test1"),
                       true);
     }
     app.goTo().returnToHomePage();
-
   }
+
+
+
 
 
   @Test
