@@ -14,6 +14,8 @@ public class ContactHelper extends HelperBase {
 
   private boolean creation;
   private ContactData contact;
+  private String email;
+  private String address;
 
   public ContactHelper(WebDriver driver) {
     super(driver);
@@ -28,8 +30,10 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
-    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("home"), contactData.getHomePhone());
     type(By.name("email"), contactData.getEmail());
+
+
 
     if (creation) {
       new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -119,28 +123,33 @@ public class ContactHelper extends HelperBase {
       String firstname = elementsInEntries.get(2).getText();
       String allPhones = elementsInEntries.get(5).getText();
       int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllphones(allPhones));
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withEmail(email).withAllphones(allPhones).withAddress(address);
+
+      contacts.add(contact);
+
     }
+
     return contacts;
-
   }
-    public ContactData infoFromEditForm (ContactData contact){
-      initContactModificationById(contact.getId());
-      String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
-      String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
-      String homephone = driver.findElement(By.name("home")).getAttribute("value");
-      String mobilephone = driver.findElement(By.name("mobile")).getAttribute("value");
-      String workphone = driver.findElement(By.name("work")).getAttribute("value");
-
-      driver.navigate().back();
-
-      return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-              .withHomePhone(homephone).withMobilePhone(mobilephone).withWorkPhone(workphone);
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+    String homephone = driver.findElement(By.name("home")).getAttribute("value");
+    String mobilephone = driver.findElement(By.name("mobile")).getAttribute("value");
+    String workphone = driver.findElement(By.name("work")).getAttribute("value");
+    String email = driver.findElement(By.name("email")).getAttribute("value");
+    String address = driver.findElement(By.name("address")).getAttribute("value");
+    driver.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomePhone(homephone).withMobilePhone(mobilephone).withWorkPhone(workphone).withEmail(email)
+            .withAddress(address);
+  }
 
 
     }
 
 
-  }
+
 

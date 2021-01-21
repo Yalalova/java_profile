@@ -20,12 +20,14 @@ import java.util.concurrent.TimeUnit;
     public boolean acceptNextAlert = true;
     private String baseUrl;
     private String browser;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
       this.browser = browser;
     }
 
     public void init() {
+      dbHelper = new DbHelper();
       //driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
        if (browser.equals(BrowserType.CHROME)) {
         driver = new ChromeDriver();
@@ -41,6 +43,7 @@ import java.util.concurrent.TimeUnit;
       navigationHelper = new NavigationHelper(driver);
       sessionHelper = new SessionHelper(driver);
       contactHelper = new ContactHelper(driver);
+
       sessionHelper.login("admin", "secret");
     }
 
@@ -96,8 +99,10 @@ import java.util.concurrent.TimeUnit;
     public SessionHelper getSessionHelper() {
       return sessionHelper;
     }
+   public DbHelper db() {
+      return dbHelper;
 
+   }
     public void confirmAction() {
-
     }
   }

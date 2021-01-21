@@ -1,0 +1,37 @@
+<list>
+  <contacts>
+    <firstname>test_name 0</firstname>
+    <lastname>test1 0</lastname>
+    <address>test3 0</address>
+    <email>test2 0</email>
+    <allPhones>test4 0</allPhones>
+  </contacts>
+  <contacts>
+    <firstname>test_name 1</firstname>
+    <lastname>test1 1</lastname>
+    <address>test3 1</address>
+    <email>test2 1</email>
+    <allPhones>test4 1</allPhones>
+  </contacts>
+  <contacts>
+    <firstname>test_name 2</firstname>
+    <lastname>test1 2</lastname>
+    <address>test3 2</address>
+    <email>test2 2</email>
+    <allPhones>test4 2</allPhones>
+  </contacts>
+  <contacts>
+    <firstname>test_name 3</firstname>
+    <lastname>test1 3</lastname>
+    <address>test3 3</address>
+    <email>test2 3</email>
+    <allPhones>test4 3</allPhones>
+  </contacts>
+  <contacts>
+    <firstname>test_name 4</firstname>
+    <lastname>test1 4</lastname>
+    <address>test3 4</address>
+    <email>test2 4</email>
+    <allPhones>test4 4</allPhones>
+  </contacts>
+</list>
